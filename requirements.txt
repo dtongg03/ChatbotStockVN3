@@ -1,0 +1,8 @@
+nltk
+vnstock3
+scikit-learn
+numpy
+pandas
+scikit-learn
+tensorflow
+xgboost

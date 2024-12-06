@@ -1,0 +1,188 @@
+languages:
+  - english
+  - vietnamese
+  - french
+
+responses:
+  greeting:
+    english:
+      - "Hello! How can I help you?"
+      - "Hi there! What can I assist you with?"
+      - "Hey! What's up?"
+      - "Yo! What can I do for you today?"
+    vietnamese:
+      - "Xin chào! Tôi có thể giúp gì cho bạn?"
+      - "Chào bạn! Bạn cần hỗ trợ gì?"
+      - "Ê! Có chuyện gì không?"
+      - "Chào nhé! Cần gì cứ nói!"
+    french:
+      - "Bonjour ! Comment puis-je vous aider ?"
+      - "Salut ! Que puis-je faire pour vous ?"
+      - "Coucou ! Quoi de neuf ?"
+      - "Hé ! Comment je peux t'aider aujourd'hui ?"
+
+  farewell:
+    english:
+      - "Goodbye! See you next time."
+      - "Thank you for using our service. Have a great day!"
+      - "Later, gator! Take care!"
+      - "Catch you on the flip side!"
+    vietnamese:
+      - "Tạm biệt! Hẹn gặp lại."
+      - "Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi. Chúc bạn một ngày tốt lành!"
+      - "Thôi nhé! Hẹn gặp lại sau!"
+      - "Bai bai! Giữ gìn sức khỏe nhé!"
+    french:
+      - "Au revoir ! À la prochaine."
+      - "Merci d'avoir utilisé notre service. Passez une excellente journée !"
+      - "À plus dans l'bus !"
+      - "Tchao ! Prends soin de toi !"
+
+  unknown:
+    english:
+      - "Sorry, I don't understand your request. Could you please rephrase it?"
+      - "I'm not programmed to handle this request. Can you ask about stock information?"
+      - "Whoops! You've lost me there. Mind trying again?"
+      - "Err... come again? I didn't quite catch that."
+    vietnamese:
+      - "Xin lỗi, tôi không hiểu yêu cầu của bạn. Bạn có thể diễn đạt lại được không?"
+      - "Tôi chưa được lập trình để xử lý yêu cầu này. Bạn có thể hỏi về thông tin cổ phiếu không?"
+      - "Ối! Tôi không hiểu rồi. Bạn nói lại được không?"
+      - "Hử? Bạn nói gì tôi chưa hiểu lắm."
+    french:
+      - "Désolé, je ne comprends pas votre demande. Pourriez-vous la reformuler ?"
+      - "Je ne suis pas programmé pour traiter cette demande. Pouvez-vous demander des informations sur les actions ?"
+      - "Oups ! Là, tu m'as perdu. Tu peux réessayer ?"
+      - "Euh... tu peux répéter ? J'ai pas tout capté."
+
+keywords:
+  greeting:
+    english: ["hello", "hi", "hey", "yo", "what's up", "sup"]
+    vietnamese: ["xin chào", "chào", "ê", "alo", "chào nhé"]
+    french: ["bonjour", "salut", "coucou", "hé", "quoi de neuf"]
+
+  farewell:
+    english: ["goodbye", "bye", "see you", "later", "take care"]
+    vietnamese: ["tạm biệt", "chào tạm biệt", "hẹn gặp lại", "bai bai", "giữ gìn sức khỏe"]
+    french: ["au revoir", "adieu", "à bientôt", "à plus", "prends soin de toi"]
+
+  stock_info:
+    english: ["price", "current", "history", "trend", "predict", "stocks", "market", "chart"]
+    vietnamese: ["giá", "hiện tại", "lịch sử", "xu hướng", "dự đoán", "cổ phiếu", "thị trường"]
+    french: ["prix", "actuel", "historique", "tendance", "prédire", "actions", "marché"]
+
+templates:
+  real_time_price:
+    english:
+      - "The current price of {code} is {price}, with a change of {change} ({percent_change}%)"
+      - "{code} is trading at {price}, {trend} with a change of {change} ({percent_change}%)"
+      - "Yo! {code} is at {price} right now. It's {trend} {change} ({percent_change}%). Wild, right?"
+    vietnamese:
+      - "Giá hiện tại của {code} là {price}, với sự thay đổi {change} ({percent_change}%)"
+      - "{code} đang giao dịch ở mức {price}, {trend} với sự thay đổi {change} ({percent_change}%)"
+      - "Ê! {code} đang ở mức {price} đấy. Nó {trend} {change} ({percent_change}%). Ghê chưa?"
+    french:
+      - "Le prix actuel de {code} est de {price}, avec un changement de {change} ({percent_change}%)"
+      - "{code} se négocie à {price}, {trend} avec un changement de {change} ({percent_change}%)"
+      - "Hey ! {code} est à {price} maintenant. C'est {trend} de {change} ({percent_change}%). Fou, non ?"
+
+  historical_data:
+    english:
+      - "Found {count} records for {code} from {start} to {end}. Here is a preview of the data: {data_preview}"
+      - "{code} has {count} data points from {start} to {end}. Check out some of the data: {data_preview}"
+      - "We've got {count} records for {code} from {start} to {end}. Here's a peek: {data_preview}"
+    vietnamese:
+      - "Tìm thấy {count} bản ghi cho {code} từ {start} đến {end}. Đây là một số dữ liệu: {data_preview}"
+      - "{code} có {count} điểm dữ liệu từ {start} đến {end}. Xem một số dữ liệu: {data_preview}"
+      - "Chúng tôi có {count} bản ghi về {code} từ {start} đến {end}. Đây là cái nhìn sơ lược: {data_preview}"
+    french:
+      - "Trouvé {count} enregistrements pour {code} du {start} au {end}. Voici un aperçu des données: {data_preview}"
+      - "{code} a {count} points de données du {start} au {end}. Voici un aperçu de certaines données: {data_preview}"
+      - "Nous avons {count} enregistrements pour {code} du {start} au {end}. Voici un aperçu: {data_preview}"
+
+  data_preview_format:
+    english:
+      - " ||| Date: {date}, Open: {open}, High: {high}, Low: {low}, Close: {close}, Volume: {volume}.2f"
+    vietnamese:
+      - "Ngày: {date}, Mở cửa: {open}, Cao nhất: {high}, Thấp nhất: {low}, Đóng cửa: {close}, Khối lượng: {volume}"
+    french:
+      - "Date: {date}, Ouverture: {open}, Haut: {high}, Bas: {low}, Clôture: {close}, Volume: {volume}"
+      -
+  stock_chart:
+    english:
+      - "Here is the stock chart for {code}. You can view it at {file_path}."
+      - "The stock chart for {code} has been generated. Check it here: {file_path}."
+    vietnamese:
+      - "Dưới đây là biểu đồ cho {code} cho thấy sự biến động giá từ {start} đến {end}."
+      - "Xem biểu đồ cổ phiếu của {code} cho khoảng thời gian từ {start} đến {end}. Đây là biểu diễn hình ảnh về sự thay đổi giá theo thời gian."
+      - "Hình dung hiệu suất của {code} với biểu đồ này từ {start} đến {end}. Nó cho thấy cách giá đã thay đổi."
+    french:
+      - "Voici le graphique pour {code} montrant le mouvement des prix de {start} à {end}."
+      - "Consultez le graphique des actions pour {code} pour la période de {start} à {end}. C'est une représentation visuelle des variations de prix au fil du temps."
+      - "Visualisez la performance de {code} avec ce graphique de {start} à {end}. Il montre comment le prix a évolué."
+
+  predict_trend:
+    english:
+      - "The trend for {code} is predicted to be {trend}. Current price: {current_price}, Predicted price for the next trading session: {predicted_price:.2f}."
+      - "The model predicts {code} will {trend}, with a price change from {current_price} to {predicted_price:.2f} for the next trading session."
+      - "Crystal ball says: {code} is gonna {trend}! Now at {current_price}, might hit {predicted_price:.2f} in the next trading session. Fingers crossed!"
+    vietnamese:
+      - "Xu hướng cho {code} được dự đoán là {trend}. Giá hiện tại: {current_price}, Giá dự đoán cho phiên giao dịch tiếp theo: {predicted_price:.2f}."
+      - "Mô hình dự đoán {code} sẽ {trend}, với sự thay đổi giá từ {current_price} đến {predicted_price:.2f} cho phiên giao dịch tiếp theo."
+      - "Bói ra lửa: {code} sẽ {trend}! Hiện tại {current_price}, có thể đạt {predicted_price:.2f} trong phiên giao dịch tiếp theo. Cầu trời!"
+    french:
+      - "La tendance pour {code} est prévue d'être {trend}. Prix actuel : {current_price}, Prix prévu pour la prochaine séance de trading : {predicted_price:.2f}."
+      - "Le modèle prédit que {code} va {trend}, avec un changement de prix de {current_price} à {predicted_price:.2f} pour la prochaine séance de trading."
+      - "La boule de cristal dit : {code} va {trend} ! Maintenant à {current_price}, pourrait atteindre {predicted_price:.2f} lors de la prochaine séance de trading. On croise les doigts !"
+trends:
+  up:
+    english: ["up", "rising", "soaring", "to the moon"]
+    vietnamese: ["tăng", "đi lên", "bay lên", "lên mặt trăng"]
+    french: ["à la hausse", "en hausse", "qui monte", "qui décolle"]
+  down:
+    english: ["down", "falling", "sinking", "in the dumps"]
+    vietnamese: ["giảm", "đi xuống", "rớt", "thảm hại"]
+    french: ["à la baisse", "en baisse", "qui chute", "dans le rouge"]
+  no_change:
+    english: ["unchanged", "stable", "holding steady", "chilling"]
+    vietnamese: ["không đổi", "ổn định", "giữ nguyên", "bình thản"]
+    french: ["inchangé", "stable", "qui se maintient", "qui fait du surplace"]
+
+sentiment_analysis:
+  positive:
+    english: ["great", "awesome", "excellent", "fantastic"]
+    vietnamese: ["tuyệt vời", "tốt quá", "xuất sắc", "tuyệt"]
+    french: ["génial", "super", "excellent", "fantastique"]
+  negative:
+    english: ["bad", "terrible", "awful", "disappointing"]
+    vietnamese: ["tệ", "khủng khiếp", "tồi tệ", "thất vọng"]
+    french: ["mauvais", "terrible", "affreux", "décevant"]
+  neutral:
+    english: ["okay", "fine", "average", "so-so"]
+    vietnamese: ["ổn", "tạm được", "trung bình", "bình thường"]
+    french: ["correct", "moyen", "comme ci comme ça", "passable"]
+
+emojis:
+  positive: ["😊", "👍", "🎉", "🚀"]
+  negative: ["😞", "👎", "😢", "💔"]
+  neutral: ["😐", "🤔", "🤷", "➖"]
+
+slang:
+  english:
+    "cool": ["awesome", "great", "fantastic"]
+    "meh": ["so-so", "average", "not great"]
+    "rip": ["terrible", "awful", "disastrous"]
+  vietnamese:
+    "xịn": ["tuyệt vời", "tốt quá", "đỉnh"]
+    "bình thường": ["tạm được", "không tệ", "không có gì đặc biệt"]
+    "xong": ["tệ quá", "hỏng bét", "thảm họa"]
+  french:
+    "cool": ["génial", "super", "top"]
+    "bof": ["moyen", "pas terrible", "comme ci comme ça"]
+    "naze": ["nul", "pourri", "catastrophique"]
+
+interjections:
+  english: ["Wow!", "Oh my!", "Geez!", "Holy cow!"]
+  vietnamese: ["Ôi trời!", "Trời ơi!", "Chà!", "Ui da!"]
+  french: ["Waouh !", "Oh là là !", "Purée !", "Sacrebleu !"]
+
