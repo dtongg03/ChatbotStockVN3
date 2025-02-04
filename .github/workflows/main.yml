@@ -2,9 +2,7 @@ name: FastAPI Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]  
-  pull_request:
-    branches: [ main ]  
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -31,45 +29,54 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Check Directory Structure
+    - name: Debug Directory Structure
       run: |
+        pwd
+        echo "Root directory contents:"
         ls -la
-        echo "Current directory contents:"
+        echo "\nAll directories:"
         find . -type d
+        echo "\nAll files:"
+        find . -type f
 
     - name: Build Static Site
       run: |
         mkdir -p dist
-        if [ -d "GUI/templates" ]; then
-          echo "Copying from GUI/templates"
-          cp -r GUI/templates dist/
-        elif [ -d ".venv/GUI/templates" ]; then
-          echo "Copying from .venv/GUI/templates"
-          cp -r .venv/GUI/templates dist/
-        else
-          echo "Templates directory not found"
-          exit 1
-        fi
+        # Look for templates in multiple locations
+        for dir in "GUI/templates" ".venv/GUI/templates" "templates"; do
+          if [ -d "$dir" ]; then
+            echo "Found templates in $dir"
+            cp -r "$dir" dist/
+            break
+          fi
+        done
 
-        if [ -d "GUI/static" ]; then
-          echo "Copying from GUI/static"
-          cp -r GUI/static dist/
-        elif [ -d ".venv/GUI/static" ]; then
-          echo "Copying from .venv/GUI/static"
-          cp -r .venv/GUI/static dist/
-        else
-          echo "Static directory not found"
-          exit 1
-        fi
+        # Look for static files
+        for dir in "GUI/static" ".venv/GUI/static" "static"; do
+          if [ -d "$dir" ]; then
+            echo "Found static files in $dir"
+            cp -r "$dir" dist/
+            break
+          fi
+        done
 
-        if [ -f "dist/templates/chat.html" ]; then
-          cp dist/templates/chat.html dist/index.html
-        else
-          echo "chat.html not found"
+        # Create index.html
+        for file in dist/templates/chat.html dist/chat.html; do
+          if [ -f "$file" ]; then
+            echo "Found chat.html at $file"
+            cp "$file" dist/index.html
+            break
+          fi
+        done
+
+        if [ ! -f "dist/index.html" ]; then
+          echo "No chat.html found in any location"
           exit 1
         fi
         
         touch dist/.nojekyll
+        echo "Build completed. Contents of dist:"
+        ls -R dist/
 
     - name: Upload Build Artifact
       uses: actions/upload-pages-artifact@v3
