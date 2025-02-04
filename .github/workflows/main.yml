@@ -7,6 +7,11 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 env:
   PYTHON_VERSION: 3.11.9
 
@@ -26,13 +31,44 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Check Directory Structure
+      run: |
+        ls -la
+        echo "Current directory contents:"
+        find . -type d
+
     - name: Build Static Site
       run: |
         mkdir -p dist
-        cp -r GUI/templates dist/
-        cp -r GUI/static dist/
-        # Create index.html from chat.html
-        cp dist/templates/chat.html dist/index.html
+        if [ -d "GUI/templates" ]; then
+          echo "Copying from GUI/templates"
+          cp -r GUI/templates dist/
+        elif [ -d ".venv/GUI/templates" ]; then
+          echo "Copying from .venv/GUI/templates"
+          cp -r .venv/GUI/templates dist/
+        else
+          echo "Templates directory not found"
+          exit 1
+        fi
+
+        if [ -d "GUI/static" ]; then
+          echo "Copying from GUI/static"
+          cp -r GUI/static dist/
+        elif [ -d ".venv/GUI/static" ]; then
+          echo "Copying from .venv/GUI/static"
+          cp -r .venv/GUI/static dist/
+        else
+          echo "Static directory not found"
+          exit 1
+        fi
+
+        if [ -f "dist/templates/chat.html" ]; then
+          cp dist/templates/chat.html dist/index.html
+        else
+          echo "chat.html not found"
+          exit 1
+        fi
+        
         touch dist/.nojekyll
 
     - name: Upload Build Artifact
@@ -44,10 +80,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
