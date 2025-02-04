@@ -29,8 +29,8 @@ jobs:
     - name: Build Static Site
       run: |
         mkdir -p dist
-        cp -r templates dist/
-        cp -r static dist/
+        cp -r GUI/templates dist/
+        cp -r GUI/static dist/
         # Create index.html from chat.html
         cp dist/templates/chat.html dist/index.html
         touch dist/.nojekyll
