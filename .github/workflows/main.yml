@@ -2,9 +2,9 @@ name: FastAPI Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]  # Changed to only use main branch
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]  # Changed to only use main branch
   workflow_dispatch:
 
 permissions:
