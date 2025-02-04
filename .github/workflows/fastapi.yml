@@ -1,0 +1,99 @@
+name: FastAPI Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  PYTHON_VERSION: 3.11.9
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Debug Directory Structure
+      run: |
+        pwd
+        echo "Root directory contents:"
+        ls -la
+        echo "\nAll directories:"
+        find . -type d
+        echo "\nAll files:"
+        find . -type f
+
+    - name: Build Static Site
+      run: |
+        mkdir -p dist
+        # Look for templates in multiple locations
+        for dir in "GUI/templates" ".venv/GUI/templates" "templates"; do
+          if [ -d "$dir" ]; then
+            echo "Found templates in $dir"
+            cp -r "$dir" dist/
+            break
+          fi
+        done
+
+        # Look for static files
+        for dir in "GUI/static" ".venv/GUI/static" "static"; do
+          if [ -d "$dir" ]; then
+            echo "Found static files in $dir"
+            cp -r "$dir" dist/
+            break
+          fi
+        done
+
+        # Create index.html
+        for file in dist/templates/chat.html dist/chat.html; do
+          if [ -f "$file" ]; then
+            echo "Found chat.html at $file"
+            cp "$file" dist/index.html
+            break
+          fi
+        done
+
+        if [ ! -f "dist/index.html" ]; then
+          echo "No chat.html found in any location"
+          exit 1
+        fi
+        
+        touch dist/.nojekyll
+        echo "Build completed. Contents of dist:"
+        ls -R dist/
+
+    - name: Upload Build Artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        name: fastapi-build
+        path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: fastapi-build
