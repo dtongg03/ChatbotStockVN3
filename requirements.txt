@@ -6,3 +6,8 @@ pandas
 scikit-learn
 tensorflow
 xgboost
+python-multipart
+aiofiles
+staticfiles
+fastapi
+uvicorn
