@@ -21,7 +21,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/", response_class=FileResponse)
 async def get_chat(request: Request):
-    file_path = "templates/chat.html"
+    file_path = "./templates/chat.html"
     if os.path.exists(file_path):
         return FileResponse(file_path)
     return HTMLResponse(content="File not found", status_code=404)
